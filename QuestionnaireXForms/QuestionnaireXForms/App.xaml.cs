@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using QuestionnaireXForms.Services;
 using Xamarin.Forms;
 
 namespace QuestionnaireXForms
@@ -11,14 +11,16 @@ namespace QuestionnaireXForms
 	{
 		public static bool IsUserLoggedIn { get; set; }
 
+		public static readonly string BaseUrl = "http://10.0.0.23:8080/gpserver";
+
+		public static User User { get; set; }
+		
+		public static string Description { get; set; }
+
 		public App ()
 		{
 			InitializeComponent();
 
-			//MainPage = new QuestionnaireXForms.MainPage();
-			//MainPage = new QuestionnaireXForms.MainPageCS();
-			
-			
 			if (!IsUserLoggedIn) {
 				MainPage = new NavigationPage (new LoginPage ());
 			} else {

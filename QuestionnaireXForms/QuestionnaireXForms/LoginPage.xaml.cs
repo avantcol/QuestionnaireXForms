@@ -33,19 +33,19 @@ namespace QuestionnaireXForms
 
             try
             {
-                string baseUrl = "http://10.0.0.23:8080/gpserver"; 
                 var client = new HttpClient(new NativeMessageHandler()) 
                 { 
-                    BaseAddress = new Uri(baseUrl) 
+                    BaseAddress = new Uri(App.BaseUrl) 
                 };
                 LoginService httpbinApiService = RestService.For<LoginService>(client);
-                User resUser = await httpbinApiService.Login(  new LoginRequestForm(user.Username, user.Password) );
+                User resUser = await httpbinApiService.Login( new LoginRequestForm(user.Username, user.Password) );
             
                 System.Console.WriteLine( resUser.id );
 
                 if (resUser != null && resUser.id != 0)
                 {
                     App.IsUserLoggedIn = true;
+                    App.User = resUser;
                     Navigation.InsertPageBefore (new MainPage (), this);
                     await Navigation.PopAsync ();
                 }
@@ -54,6 +54,7 @@ namespace QuestionnaireXForms
                     App.IsUserLoggedIn = false;
                     messageLabel.Text = "Login failed";
                     passwordEntry.Text = string.Empty;
+                    App.User = null;
                 }
                 
             }

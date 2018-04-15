@@ -1,15 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using ModernHttpClient;
+using Newtonsoft.Json.Linq;
+using QuestionnaireXForms.Services;
+using Refit;
 using Xamarin.Forms;
 
 namespace QuestionnaireXForms
 {
 	public partial class MainPage : ContentPage
 	{
-		public MainPage()
+		public MainPage() 
 		{
 			InitializeComponent();
 			
@@ -20,7 +25,9 @@ namespace QuestionnaireXForms
 			toolbarItem.Clicked += OnLogoutButtonClicked;
 			ToolbarItems.Add(toolbarItem);
 
-			Title = "Main Page";
+			Title = "Questionnaire";
+			
+			/*
 			Content = new StackLayout
 			{
 				Children =
@@ -33,6 +40,7 @@ namespace QuestionnaireXForms
 					}
 				}
 			};
+			*/
 
 			async void OnLogoutButtonClicked(object sender, EventArgs e)
 			{
@@ -41,6 +49,24 @@ namespace QuestionnaireXForms
 				await Navigation.PopAsync();
 			}
 
+			if (App.IsUserLoggedIn && App.User != null)
+			{
+				var client = new HttpClient(new NativeMessageHandler()) 
+				{ 
+					BaseAddress = new Uri(App.BaseUrl) 
+				};
+				PollService httpbinApiService = RestService.For<PollService>(client);
+				Task<JArray> questions = httpbinApiService.GetQuestions( App.User.id );
+				questions.Wait();
+				
+				System.Console.WriteLine( questions.Result.ToString() );
+			}
+
+		}
+		
+		async void OnItemSelected (object sender, SelectedItemChangedEventArgs e)
+		{
+			//await Navigation.PushModalAsync (new DetailPage (e.SelectedItem));
 		}
 	}
 }
