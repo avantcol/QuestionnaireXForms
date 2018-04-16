@@ -56,23 +56,8 @@ namespace QuestionnaireXForms
                 
                 Navigation.PopModalAsync();
 
-                //_parentPage.GetListView().Items = null;
                 _parentPage.GetListView().Items = new ObservableCollection<Question>(); 
                 _parentPage.GetListView().Items = DataSource.GetQuestions();
-
-                //this.FindByName<NativeListView> ("nativeListView").NotifyItemSelected( question);// Text = question.UserAnserAsString;
-
-                /*
-                try
-                {
-                    _parentPage.GetListView().NotifyItemSelected( sender );
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e);
-                    throw;
-                }
-                */
 
             };
 

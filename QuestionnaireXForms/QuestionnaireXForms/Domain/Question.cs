@@ -5,16 +5,19 @@ using Newtonsoft.Json.Linq;
 
 namespace QuestionnaireXForms.Domain
 {
-    public class Question : INotifyPropertyChanged
+    public class Question
     {
         public enum AnswerType
         {
-            NotApply=1, Ok=2, Fail=3, NoAnswer
+            NotApply = 1,
+            Ok = 2,
+            Fail = 3,
+            NoAnswer
         };
 
         public static AnswerType FromJSON(JToken jt)
         {
-            switch ( jt["id"].Value<int>() )
+            switch (jt["id"].Value<int>())
             {
                 case 1: return AnswerType.NotApply;
                 case 2: return AnswerType.Ok;
@@ -29,19 +32,7 @@ namespace QuestionnaireXForms.Domain
         public AnswerType[] AnswerTypes_ { get; set; }
 
         private AnswerType _userAnswer;
-        public AnswerType UserAnswer
-        {
-            get => _userAnswer;
-            set
-            {
-                _userAnswer = value;
-                if (PropertyChanged != null)
-                {
-                    PropertyChanged(this, 
-                        new PropertyChangedEventArgs("UserAnswer"));// Throw!!
-                }
-            }
-        }
+        public AnswerType UserAnswer { get; set; }
 
         public string UserAnserAsString
         {
@@ -52,33 +43,5 @@ namespace QuestionnaireXForms.Domain
                 return UserAnswer.ToString();
             }
         }
-        
-        /*
-        protected bool ChangeAndNotify<T>(ref T property, T value, [CallerMemberName] string propertyName = "")
-        {
-            if (!EqualityComparer<T>.Default.Equals(property, value))
-            {
-                property = value;
-                NotifyPropertyChanged(propertyName);
-                return true;
-            }
-
-
-            return false;
-        }
-        protected void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        */
-        
-        public event PropertyChangedEventHandler PropertyChanged;
-        
-        
     }
 }

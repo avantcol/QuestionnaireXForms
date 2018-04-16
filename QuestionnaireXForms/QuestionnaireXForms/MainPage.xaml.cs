@@ -33,21 +33,6 @@ namespace QuestionnaireXForms
 
 			Title = "Questionnaire";
 			
-			/*
-			Content = new StackLayout
-			{
-				Children =
-				{
-					new Label
-					{
-						Text = "Main app content goes here",
-						HorizontalOptions = LayoutOptions.Center,
-						VerticalOptions = LayoutOptions.CenterAndExpand
-					}
-				}
-			};
-			*/
-
 			async void OnLogoutButtonClicked(object sender, EventArgs e)
 			{
 				App.IsUserLoggedIn = false;
@@ -68,14 +53,6 @@ namespace QuestionnaireXForms
 				System.Console.WriteLine( questions.Result.ToString() );
 				
 				nativeListView.Items = DataSource.GetList ( questions.Result );
-
-				/*
-				Binding myBinding = new Binding("UserAnswer");
-				myBinding.Source = this;
-				myBinding.Path ="UserAnswer";
-				myBinding.Mode = BindingMode.TwoWay;
-				nativeListView.SetBinding (NativeListView.ItemsSourceProperty, myBinding);
-				*/ 
 			}
 
 		}
