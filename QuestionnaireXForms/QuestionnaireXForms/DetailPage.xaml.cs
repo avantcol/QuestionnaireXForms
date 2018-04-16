@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using Android;
 using Android.Widget;
 using QuestionnaireXForms.Domain;
@@ -54,6 +55,10 @@ namespace QuestionnaireXForms
                 }
                 
                 Navigation.PopModalAsync();
+
+                //_parentPage.GetListView().Items = null;
+                _parentPage.GetListView().Items = new ObservableCollection<Question>(); 
+                _parentPage.GetListView().Items = DataSource.GetQuestions();
 
                 //this.FindByName<NativeListView> ("nativeListView").NotifyItemSelected( question);// Text = question.UserAnserAsString;
 

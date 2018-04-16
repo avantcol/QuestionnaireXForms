@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using QuestionnaireXForms.Domain;
 using Xamarin.Forms;
 
@@ -14,9 +15,9 @@ namespace QuestionnaireXForms
         public static readonly BindableProperty ItemsProperty =
             BindableProperty.Create("Items", typeof(IEnumerable<Question>), typeof(NativeListView), new List<Question>());
 
-        public IEnumerable<Question> Items
+        public ObservableCollection<Question> Items
         {
-            get { return (IEnumerable<Question>)GetValue(ItemsProperty); }
+            get { return (ObservableCollection<Question>)GetValue(ItemsProperty); }
             set { SetValue(ItemsProperty, value); }
         }
 

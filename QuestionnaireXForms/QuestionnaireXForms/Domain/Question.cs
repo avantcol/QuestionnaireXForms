@@ -27,8 +27,21 @@ namespace QuestionnaireXForms.Domain
         public long Id_ { get; set; }
         public string Question_ { get; set; }
         public AnswerType[] AnswerTypes_ { get; set; }
-        
-        public AnswerType UserAnswer { get; set; }
+
+        private AnswerType _userAnswer;
+        public AnswerType UserAnswer
+        {
+            get => _userAnswer;
+            set
+            {
+                _userAnswer = value;
+                if (PropertyChanged != null)
+                {
+                    PropertyChanged(this, 
+                        new PropertyChangedEventArgs("UserAnswer"));// Throw!!
+                }
+            }
+        }
 
         public string UserAnserAsString
         {
@@ -40,6 +53,7 @@ namespace QuestionnaireXForms.Domain
             }
         }
         
+        /*
         protected bool ChangeAndNotify<T>(ref T property, T value, [CallerMemberName] string propertyName = "")
         {
             if (!EqualityComparer<T>.Default.Equals(property, value))
@@ -61,5 +75,10 @@ namespace QuestionnaireXForms.Domain
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
+        */
+        
+        public event PropertyChangedEventHandler PropertyChanged;
+        
+        
     }
 }

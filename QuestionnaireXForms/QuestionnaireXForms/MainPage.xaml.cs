@@ -69,6 +69,13 @@ namespace QuestionnaireXForms
 				
 				nativeListView.Items = DataSource.GetList ( questions.Result );
 
+				/*
+				Binding myBinding = new Binding("UserAnswer");
+				myBinding.Source = this;
+				myBinding.Path ="UserAnswer";
+				myBinding.Mode = BindingMode.TwoWay;
+				nativeListView.SetBinding (NativeListView.ItemsSourceProperty, myBinding);
+				*/ 
 			}
 
 		}

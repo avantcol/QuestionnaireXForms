@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using Newtonsoft.Json.Linq;
 using QuestionnaireXForms.Domain;
@@ -10,9 +11,16 @@ namespace QuestionnaireXForms
 {
     public class DataSource
     {
-        public static List<Question> GetList( JArray questions )
+        private static ObservableCollection<Question> _questions = new ObservableCollection<Question>();
+
+        public static ObservableCollection<Question> GetQuestions()
         {
-            var l = new List<Question>();
+            return _questions;
+        }
+
+        public static ObservableCollection<Question> GetList( JArray questions )
+        {
+            var l = new ObservableCollection<Question>();
             foreach (var jQuestion in questions )
             {
                 JArray jAnswerTypes = jQuestion["questions"].Value<JArray>();
@@ -31,6 +39,8 @@ namespace QuestionnaireXForms
                 
                 l.Add( question );
             }
+
+            _questions = l;
             
             return l;
         }
