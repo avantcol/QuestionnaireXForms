@@ -12,10 +12,16 @@
         </OnPlatform>
     </ContentPage.Padding>
     <ContentPage.Content>
-        <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
+        <StackLayout HorizontalOptions="Center" VerticalOptions="Center" x:Name="stackLayout">
+            <!--
             <Label Text="Xamarin.Forms Detail Page" />
+            -->
             <Label x:Name="detailLabel" />
+
+            
+
             <Button x:Name="dismissButton" Clicked="OnButtonClicked" Text="Dismiss" />
-        </StackLayout>
+        
+            </StackLayout>
     </ContentPage.Content>
 </ContentPage>

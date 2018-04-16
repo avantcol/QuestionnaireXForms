@@ -24,5 +24,7 @@ namespace QuestionnaireXForms.Domain
         public long Id_ { get; set; }
         public string Question_ { get; set; }
         public AnswerType[] AnswerTypes_ { get; set; }
+        
+        public AnswerType UserAnswer { get; set; }
     }
 }
