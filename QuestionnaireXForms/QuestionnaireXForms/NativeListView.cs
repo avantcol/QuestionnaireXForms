@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using QuestionnaireXForms.Domain;
 using Xamarin.Forms;
 
 namespace QuestionnaireXForms
@@ -11,11 +12,11 @@ namespace QuestionnaireXForms
     public class NativeListView : ListView
     {
         public static readonly BindableProperty ItemsProperty =
-            BindableProperty.Create("Items", typeof(IEnumerable<DataSource>), typeof(NativeListView), new List<DataSource>());
+            BindableProperty.Create("Items", typeof(IEnumerable<Question>), typeof(NativeListView), new List<Question>());
 
-        public IEnumerable<DataSource> Items
+        public IEnumerable<Question> Items
         {
-            get { return (IEnumerable<DataSource>)GetValue(ItemsProperty); }
+            get { return (IEnumerable<Question>)GetValue(ItemsProperty); }
             set { SetValue(ItemsProperty, value); }
         }
 

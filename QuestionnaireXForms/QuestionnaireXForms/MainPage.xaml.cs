@@ -60,6 +60,9 @@ namespace QuestionnaireXForms
 				questions.Wait();
 				
 				System.Console.WriteLine( questions.Result.ToString() );
+				
+				nativeListView.Items = DataSource.GetList ( questions.Result );
+
 			}
 
 		}
