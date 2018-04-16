@@ -31,6 +31,14 @@ namespace QuestionnaireXForms
 			toolbarItem.Clicked += OnLogoutButtonClicked;
 			ToolbarItems.Add(toolbarItem);
 
+
+			var submitItem = new ToolbarItem
+			{
+				Text = "Submit"
+			};
+			submitItem.Clicked += OnSubmitButtonClicked;
+			ToolbarItems.Add(toolbarItem);
+			
 			Title = "Questionnaire";
 			
 			async void OnLogoutButtonClicked(object sender, EventArgs e)
@@ -38,6 +46,11 @@ namespace QuestionnaireXForms
 				App.IsUserLoggedIn = false;
 				Navigation.InsertPageBefore(new LoginPage(), this);
 				await Navigation.PopAsync();
+			}
+
+			async void OnSubmitButtonClicked(object sender, EventArgs e)
+			{
+				// todo
 			}
 
 			if (App.IsUserLoggedIn && App.User != null)
@@ -61,5 +74,6 @@ namespace QuestionnaireXForms
 		{
 			await Navigation.PushModalAsync (new DetailPage (e.SelectedItem, this));
 		}
+		
 	}
 }
