@@ -1,12 +1,15 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using Newtonsoft.Json.Linq;
 
 namespace QuestionnaireXForms.Domain
 {
-    public class Question
+    public class Question : INotifyPropertyChanged
     {
         public enum AnswerType
         {
-            NotApply=1, Ok=2, Fail=3
+            NotApply=1, Ok=2, Fail=3, NoAnswer
         };
 
         public static AnswerType FromJSON(JToken jt)
@@ -18,13 +21,45 @@ namespace QuestionnaireXForms.Domain
                 case 3: return AnswerType.Fail;
             }
 
-            return AnswerType.NotApply;
+            return AnswerType.NoAnswer;
         }
-        
+
         public long Id_ { get; set; }
         public string Question_ { get; set; }
         public AnswerType[] AnswerTypes_ { get; set; }
         
         public AnswerType UserAnswer { get; set; }
+
+        public string UserAnserAsString
+        {
+            get
+            {
+                if (UserAnswer == AnswerType.NoAnswer)
+                    return "";
+                return UserAnswer.ToString();
+            }
+        }
+        
+        protected bool ChangeAndNotify<T>(ref T property, T value, [CallerMemberName] string propertyName = "")
+        {
+            if (!EqualityComparer<T>.Default.Equals(property, value))
+            {
+                property = value;
+                NotifyPropertyChanged(propertyName);
+                return true;
+            }
+
+
+            return false;
+        }
+        protected void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
     }
 }

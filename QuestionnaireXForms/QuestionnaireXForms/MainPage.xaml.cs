@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -14,6 +15,11 @@ namespace QuestionnaireXForms
 {
 	public partial class MainPage : ContentPage
 	{
+		public NativeListView GetListView()
+		{
+			return nativeListView;
+		}
+
 		public MainPage() 
 		{
 			InitializeComponent();
@@ -69,7 +75,7 @@ namespace QuestionnaireXForms
 		
 		async void OnItemSelected (object sender, SelectedItemChangedEventArgs e)
 		{
-			await Navigation.PushModalAsync (new DetailPage (e.SelectedItem));
+			await Navigation.PushModalAsync (new DetailPage (e.SelectedItem, this));
 		}
 	}
 }

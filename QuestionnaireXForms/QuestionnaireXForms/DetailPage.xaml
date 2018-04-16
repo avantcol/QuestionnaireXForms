@@ -18,9 +18,9 @@
             -->
             <Label x:Name="detailLabel" />
 
-            
-
+            <!--
             <Button x:Name="dismissButton" Clicked="OnButtonClicked" Text="Dismiss" />
+            -->
         
             </StackLayout>
     </ContentPage.Content>

@@ -8,7 +8,9 @@ using Android.Graphics.Drawables;
 using Android.Views;
 using Android.Widget;
 using QuestionnaireXForms.Domain;
+using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
+using View = Android.Views.View;
 
 namespace QuestionnaireXForms.Droid
 {
@@ -58,10 +60,12 @@ namespace QuestionnaireXForms.Droid
                 view = context.LayoutInflater.Inflate (Resource.Layout.NativeAndroidListViewCell, null);
             }
             view.FindViewById<TextView> (Resource.Id.Text1).Text = item.Question_;
-            /*
-            view.FindViewById<TextView> (Resource.Id.Text2).Text = item.Category;
-            */
 
+            view.FindViewById<TextView> (Resource.Id.Text2).Text = item.UserAnserAsString;
+
+            //Binding companyBinding = new Binding { Source = phone, Path = "Company" };
+            //companyValueLabel.SetBinding(Label.TextProperty, companyBinding);
+            
             // grab the old image and dispose of it
             /*           
             if (view.FindViewById<ImageView> (Resource.Id.Image).Drawable != null) {
