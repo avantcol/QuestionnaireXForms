@@ -69,7 +69,7 @@ namespace QuestionnaireXForms
 		
 		async void OnItemSelected (object sender, SelectedItemChangedEventArgs e)
 		{
-			//await Navigation.PushModalAsync (new DetailPage (e.SelectedItem));
+			await Navigation.PushModalAsync (new DetailPage (e.SelectedItem));
 		}
 	}
 }
