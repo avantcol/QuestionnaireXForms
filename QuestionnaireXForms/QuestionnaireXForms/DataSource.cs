@@ -12,6 +12,7 @@ namespace QuestionnaireXForms
     {
         public static List<Question> GetList( JArray questions )
         {
+            var l = new List<Question>();
             foreach (var jQuestion in questions )
             {
                 JArray jAnswerTypes = jQuestion["questions"].Value<JArray>();
@@ -27,9 +28,10 @@ namespace QuestionnaireXForms
                     question.AnswerTypes_[i] = Question.FromJSON(jAnswerType);
                     ++i;
                 }
+                
+                l.Add( question );
             }
             
-            var l = new List<Question>();
             return l;
         }
     }
