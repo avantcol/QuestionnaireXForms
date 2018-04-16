@@ -14,7 +14,7 @@ namespace QuestionnaireXForms
     public class NativeListView : ListView, INotifyPropertyChanged
     {
         public static readonly BindableProperty ItemsProperty =
-            BindableProperty.Create("Items", typeof(IEnumerable<Question>), typeof(NativeListView), new List<Question>());
+            BindableProperty.Create("Items", typeof(IEnumerable<Question>), typeof(NativeListView), new ObservableCollection<Question>());
 
         public ObservableCollection<Question> Items
         {

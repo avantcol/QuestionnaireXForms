@@ -1,12 +1,14 @@
 ﻿
 
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Android.App;
 using Android.Graphics.Drawables;
 using Android.Views;
 using Android.Widget;
+using Java.Util;
 using QuestionnaireXForms.Domain;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
@@ -21,18 +23,18 @@ namespace QuestionnaireXForms.Droid
     public class NativeAndroidListViewAdapter : BaseAdapter<Question>
     {
         readonly Activity context;
-        IList<Question> tableItems = new List<Question> ();
+        ObservableCollection<Question> tableItems = new ObservableCollection<Question> ();
 
-        public IEnumerable<Question> Items {
+        public ObservableCollection<Question> Items {
             set { 
-                tableItems = value.ToList ();
+                tableItems = new ObservableCollection<Question>( value );
             }
         }
 
         public NativeAndroidListViewAdapter (Activity context, NativeListView view)
         {
             this.context = context;
-            tableItems = view.Items.ToList ();
+            tableItems = new ObservableCollection<Question>( view.Items );
         }
 
         public override Question this [int position] {
