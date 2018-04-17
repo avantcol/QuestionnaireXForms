@@ -12,11 +12,28 @@
 		</OnPlatform>
 	</ContentPage.Padding>
 	<ContentPage.Content>
+
+		<!--
+		<Grid>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="*" />
+				<RowDefinition Height="Auto" />
+			</Grid.RowDefinitions>
+
+			<Image x:Name="PhotoImage" />
+			<Button x:Name="CameraButton" Text="Take Photo" Grid.Row="1" />
+		</Grid>
+		-->
+		
 		<Grid>
 			<Grid.RowDefinitions>
 				<RowDefinition Height="Auto" />
 				<RowDefinition Height="*" />
 			</Grid.RowDefinitions>
+
+			<Image x:Name="PhotoImage" />
+			<Button x:Name="CameraButton" Text="Take Photo" Grid.Row="0" />
+			
 			<!--
 			<Label Text="{x:Static questionnaireXForms:App.Description}" HorizontalTextAlignment="Center" />
 			-->

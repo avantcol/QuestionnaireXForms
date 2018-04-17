@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ModernHttpClient;
 using Newtonsoft.Json.Linq;
+using Plugin.Media;
 using QuestionnaireXForms.Services;
 using Refit;
 using Xamarin.Forms;
@@ -37,7 +38,7 @@ namespace QuestionnaireXForms
 				Text = "Submit"
 			};
 			submitItem.Clicked += OnSubmitButtonClicked;
-			ToolbarItems.Add(toolbarItem);
+			ToolbarItems.Add(submitItem);
 			
 			Title = "Questionnaire";
 			
@@ -53,6 +54,8 @@ namespace QuestionnaireXForms
 				// todo
 			}
 
+			CameraButton.Clicked += CameraButton_Clicked;
+
 			if (App.IsUserLoggedIn && App.User != null)
 			{
 				var client = new HttpClient(new NativeMessageHandler()) 
@@ -66,6 +69,8 @@ namespace QuestionnaireXForms
 				System.Console.WriteLine( questions.Result.ToString() );
 				
 				nativeListView.Items = DataSource.GetList ( questions.Result );
+
+
 			}
 
 		}
@@ -75,5 +80,36 @@ namespace QuestionnaireXForms
 			await Navigation.PushModalAsync (new DetailPage (e.SelectedItem, this));
 		}
 		
+		async void CameraButton_Clicked(object sender, EventArgs e)
+		{
+			System.Console.WriteLine("CameraButton_Clicked");
+			
+			await CrossMedia.Current.Initialize();
+			
+			if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
+			{
+				await DisplayAlert("No Camera", ":( No camera available.", "OK");
+				return;
+			}
+			
+
+			await DisplayAlert(">>>>>>>>>>>>>",">>>>>>>>>>",">>>>>>>");
+			
+			var file = await CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions
+			{
+				Directory = "Sample",
+				Name = "test.jpg"
+			});
+
+			if (file == null)
+				return;
+			
+			await DisplayAlert("File Location", file.Path, "OK");
+			
+			//var photo = await Plugin.Media.CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions() { });
+
+			//if (photo != null)
+			//	PhotoImage.Source = ImageSource.FromStream(() => { return photo.GetStream(); });
+		}
 	}
 }

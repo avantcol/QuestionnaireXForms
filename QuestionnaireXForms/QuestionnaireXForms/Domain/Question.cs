@@ -9,16 +9,17 @@ namespace QuestionnaireXForms.Domain
     {
         public enum AnswerType
         {
+            NoAnswer = 0,
             NotApply = 1,
             Ok = 2,
             Fail = 3,
-            NoAnswer
         };
 
         public static AnswerType FromJSON(JToken jt)
         {
             switch (jt["id"].Value<int>())
             {
+                case 0: return AnswerType.NoAnswer;
                 case 1: return AnswerType.NotApply;
                 case 2: return AnswerType.Ok;
                 case 3: return AnswerType.Fail;
