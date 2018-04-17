@@ -21,10 +21,10 @@ namespace QuestionnaireXForms
 			return nativeListView;
 		}
 
-		public MainPage() 
+		public MainPage()
 		{
 			InitializeComponent();
-			
+
 			var toolbarItem = new ToolbarItem
 			{
 				Text = "Logout"
@@ -39,9 +39,9 @@ namespace QuestionnaireXForms
 			};
 			submitItem.Clicked += OnSubmitButtonClicked;
 			ToolbarItems.Add(submitItem);
-			
+
 			Title = "Questionnaire";
-			
+
 			async void OnLogoutButtonClicked(object sender, EventArgs e)
 			{
 				App.IsUserLoggedIn = false;
@@ -58,58 +58,54 @@ namespace QuestionnaireXForms
 
 			if (App.IsUserLoggedIn && App.User != null)
 			{
-				var client = new HttpClient(new NativeMessageHandler()) 
-				{ 
-					BaseAddress = new Uri(App.BaseUrl) 
+				var client = new HttpClient(new NativeMessageHandler())
+				{
+					BaseAddress = new Uri(App.BaseUrl)
 				};
 				PollService httpbinApiService = RestService.For<PollService>(client);
-				Task<JArray> questions = httpbinApiService.GetQuestions( App.User.id );
+				Task<JArray> questions = httpbinApiService.GetQuestions(App.User.id);
 				questions.Wait();
-				
-				System.Console.WriteLine( questions.Result.ToString() );
-				
-				nativeListView.Items = DataSource.GetList ( questions.Result );
+
+				System.Console.WriteLine(questions.Result.ToString());
+
+				nativeListView.Items = DataSource.GetList(questions.Result);
 
 
 			}
 
 		}
-		
-		async void OnItemSelected (object sender, SelectedItemChangedEventArgs e)
+
+		async void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
 		{
-			await Navigation.PushModalAsync (new DetailPage (e.SelectedItem, this));
+			await Navigation.PushModalAsync(new DetailPage(e.SelectedItem, this));
 		}
-		
+
 		async void CameraButton_Clicked(object sender, EventArgs e)
 		{
-			System.Console.WriteLine("CameraButton_Clicked");
-			
-			await CrossMedia.Current.Initialize();
-			
-			if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
+			try
 			{
-				await DisplayAlert("No Camera", ":( No camera available.", "OK");
-				return;
+
+				await CrossMedia.Current.Initialize();
+
+				if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
+				{
+					await DisplayAlert("No Camera", ":( No camera available.", "OK");
+					return;
+				}
+
+				var file = await CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions
+				{
+					Directory = "Sample",
+					Name = "test.jpg"
+				});
+
+				if (file != null)
+					PhotoImage.Source = ImageSource.FromStream(() => file.GetStream());
 			}
-			
-
-			await DisplayAlert(">>>>>>>>>>>>>",">>>>>>>>>>",">>>>>>>");
-			
-			var file = await CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions
+			catch (Exception exception)
 			{
-				Directory = "Sample",
-				Name = "test.jpg"
-			});
-
-			if (file == null)
-				return;
-			
-			await DisplayAlert("File Location", file.Path, "OK");
-			
-			//var photo = await Plugin.Media.CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions() { });
-
-			//if (photo != null)
-			//	PhotoImage.Source = ImageSource.FromStream(() => { return photo.GetStream(); });
+				Console.WriteLine(exception);
+			}
 		}
 	}
 }
