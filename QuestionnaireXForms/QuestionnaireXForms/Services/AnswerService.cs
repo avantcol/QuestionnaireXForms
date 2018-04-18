@@ -26,7 +26,8 @@ namespace QuestionnaireXForms.Services
                 JObject jObject = new JObject
                 {
                     {"id", question.Id_}, 
-                    {"userAnswer", (int) question.UserAnswer}
+                    {"userAnswer", (int) question.UserAnswer},
+                    {"description","test todo"}
                 };
                 jQuestions.Add( jObject);
             }
@@ -34,21 +35,31 @@ namespace QuestionnaireXForms.Services
             JObject pollAnswers = new JObject
             {
                 {"userId", App.User.id}, 
+                {"questionnaireId", DataSource.QuestionnaireId},
+                {"time", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") },
                 {"answers", jQuestions}
             };
 
             System.Console.WriteLine(pollAnswers.ToString());
-            
-            
-            var client = new HttpClient(new NativeMessageHandler())
-            {
-                BaseAddress = new Uri(App.BaseUrl)
-            };
-            IAnswerService answerService = RestService.For<IAnswerService>(client);
-            Task<JArray> answersResponce = answerService.SendAnswers( pollAnswers.ToString() );
-            answersResponce.Wait();
 
-            System.Console.WriteLine(answersResponce.Result.ToString());
+
+            try
+            {
+                var client = new HttpClient(new NativeMessageHandler())
+                {
+                    BaseAddress = new Uri(App.BaseUrl)
+                };
+                IAnswerService answerService = RestService.For<IAnswerService>(client);
+                Task<JArray> answersResponce = answerService.SendAnswers( pollAnswers.ToString() );
+                answersResponce.Wait();
+
+                System.Console.WriteLine(answersResponce.Result.ToString());
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
 
         }
         
