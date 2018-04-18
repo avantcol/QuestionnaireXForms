@@ -4,9 +4,9 @@ using Refit;
 
 namespace QuestionnaireXForms.Services
 {
-    public interface PollService
+    public interface QuestionnaireService
     {
         [Get("/questionnaire/polls")]
-        Task<JArray> GetQuestions( long userId );
+        Task<JObject> GetQuestions( long userId );
     }
 }

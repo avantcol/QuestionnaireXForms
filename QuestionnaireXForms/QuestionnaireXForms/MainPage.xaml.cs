@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ModernHttpClient;
 using Newtonsoft.Json.Linq;
+using Org.Json;
 using Plugin.Media;
 using QuestionnaireXForms.Services;
 using Refit;
@@ -51,7 +52,7 @@ namespace QuestionnaireXForms
 
 			async void OnSubmitButtonClicked(object sender, EventArgs e)
 			{
-				// todo
+				AnswerService.SendAnswers();
 			}
 
 			CameraButton.Clicked += CameraButton_Clicked;
@@ -62,8 +63,8 @@ namespace QuestionnaireXForms
 				{
 					BaseAddress = new Uri(App.BaseUrl)
 				};
-				PollService httpbinApiService = RestService.For<PollService>(client);
-				Task<JArray> questions = httpbinApiService.GetQuestions(App.User.id);
+				QuestionnaireService httpbinApiService = RestService.For<QuestionnaireService>(client);
+				Task<JObject> questions = httpbinApiService.GetQuestions(App.User.id);
 				questions.Wait();
 
 				System.Console.WriteLine(questions.Result.ToString());

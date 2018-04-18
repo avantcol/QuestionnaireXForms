@@ -9,7 +9,7 @@ using Xamarin.Forms;
 
 namespace QuestionnaireXForms
 {
-    public class DataSource
+    public static class DataSource
     {
         private static ObservableCollection<Question> _questions = new ObservableCollection<Question>();
 
@@ -18,12 +18,22 @@ namespace QuestionnaireXForms
             return _questions;
         }
 
-        public static ObservableCollection<Question> GetList( JArray questions )
+        public static long QuestionnaireId { get; set; }
+        public static string Description { get; set; }
+        public static string Name { get; set; }
+
+        public static ObservableCollection<Question> GetList( JObject questionnaire )
         {
+            QuestionnaireId = questionnaire["id"].Value<long>();
+            Description = questionnaire["description"].Value<string>();
+            Name = questionnaire["name"].Value<string>();
+            
+            JArray jQuestions = questionnaire["questions"].Value<JArray>();
+            
             var l = new ObservableCollection<Question>();
-            foreach (var jQuestion in questions )
+            foreach (var jQuestion in jQuestions )
             {
-                JArray jAnswerTypes = jQuestion["questions"].Value<JArray>();
+                JArray jAnswerTypes = jQuestion["answerTypes"].Value<JArray>();
                 var question = new Question
                 {
                     Id_ = jQuestion["id"].Value<long>(),
