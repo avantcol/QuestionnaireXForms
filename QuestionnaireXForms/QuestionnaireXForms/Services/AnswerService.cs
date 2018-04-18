@@ -64,11 +64,15 @@ namespace QuestionnaireXForms.Services
 
                 System.Console.WriteLine( "ok" );
 
+                AttachmentService.UploadBitmapAsync(DataSource.Photos);
+
+                /*
                 foreach (var file in  DataSource.Photos )
                 {
                     System.Console.WriteLine( file.ToString() );
                     AttachmentService.UploadBitmapAsync(file);
                 }
+                */
            }
             catch (Exception e)
             {
