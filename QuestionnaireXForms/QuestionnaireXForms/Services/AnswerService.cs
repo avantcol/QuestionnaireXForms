@@ -4,6 +4,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Android.Graphics;
 using ModernHttpClient;
 using Newtonsoft.Json.Linq;
 using QuestionnaireXForms.Domain;
@@ -50,12 +51,25 @@ namespace QuestionnaireXForms.Services
                     BaseAddress = new Uri(App.BaseUrl)
                 };
                 IAnswerService answerService = RestService.For<IAnswerService>(client);
-                Task<JArray> answersResponce = answerService.SendAnswers( pollAnswers.ToString() );
+                Task<JObject> answersResponce = answerService.SendAnswers( pollAnswers.ToString() );
                 answersResponce.Wait();
 
                 System.Console.WriteLine(answersResponce.Result.ToString());
 
-            }
+                System.Console.WriteLine( "11111111111111111111111111111" );
+
+                System.Console.WriteLine( DataSource.Photos );
+
+                System.Console.WriteLine( DataSource.Photos.ToString() );
+
+                System.Console.WriteLine( "ok" );
+
+                foreach (var file in  DataSource.Photos )
+                {
+                    System.Console.WriteLine( file.ToString() );
+                    AttachmentService.UploadBitmapAsync(file);
+                }
+           }
             catch (Exception e)
             {
                 Console.WriteLine(e);
@@ -68,6 +82,6 @@ namespace QuestionnaireXForms.Services
     public interface IAnswerService
     {
         [Get("/questionnaire/answers")]
-        Task<JArray> SendAnswers( string answers );        
+        Task<JObject> SendAnswers( string answers );        
     }
 }

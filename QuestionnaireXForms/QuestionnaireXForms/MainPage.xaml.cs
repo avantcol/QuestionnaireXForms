@@ -101,7 +101,10 @@ namespace QuestionnaireXForms
 				});
 
 				if (file != null)
+				{
+					DataSource.Photos.Add( file );
 					PhotoImage.Source = ImageSource.FromStream(() => file.GetStream());
+				}
 			}
 			catch (Exception exception)
 			{

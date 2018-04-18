@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using Newtonsoft.Json.Linq;
+using Plugin.Media.Abstractions;
 using QuestionnaireXForms.Domain;
 using Xamarin.Forms;
 
@@ -21,6 +22,10 @@ namespace QuestionnaireXForms
         public static long QuestionnaireId { get; set; }
         public static string Description { get; set; }
         public static string Name { get; set; }
+
+
+        public static List<MediaFile> Photos { get; set; } = new List<MediaFile>();
+
 
         public static ObservableCollection<Question> GetList( JObject questionnaire )
         {
