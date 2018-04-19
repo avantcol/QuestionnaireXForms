@@ -12,32 +12,20 @@
 		</OnPlatform>
 	</ContentPage.Padding>
 	<ContentPage.Content>
-
-		<!--
-		<Grid>
-			<Grid.RowDefinitions>
-				<RowDefinition Height="*" />
-				<RowDefinition Height="Auto" />
-			</Grid.RowDefinitions>
-
-			<Image x:Name="PhotoImage" />
-			<Button x:Name="CameraButton" Text="Take Photo" Grid.Row="1" />
-		</Grid>
-		-->
-		
 		<Grid>
 			<Grid.RowDefinitions>
 				<RowDefinition Height="Auto" />
 				<RowDefinition Height="*" />
+				<RowDefinition Height="*" />
 			</Grid.RowDefinitions>
 
-			<Image x:Name="PhotoImage" />
 			<Button x:Name="CameraButton" Text="Take Photo" Grid.Row="0" />
+			<Image x:Name="PhotoImage" Grid.Row="1"/>
 			
 			<!--
 			<Label Text="{x:Static questionnaireXForms:App.Description}" HorizontalTextAlignment="Center" />
 			-->
-			<local:NativeListView Grid.Row="1" x:Name="nativeListView" ItemSelected="OnItemSelected" VerticalOptions="FillAndExpand" />
+			<local:NativeListView Grid.Row="2" x:Name="nativeListView" ItemSelected="OnItemSelected" VerticalOptions="FillAndExpand" />
 		</Grid>
 	</ContentPage.Content> 
 </ContentPage>

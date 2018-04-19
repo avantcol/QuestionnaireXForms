@@ -11,7 +11,7 @@ namespace QuestionnaireXForms.Services
 {
     public static class AttachmentService
     {
-        public static async Task<string> UploadBitmapAsync( List<MediaFile> files )
+        public static async Task<string> UploadBitmapAsync( List<MediaFile> files, long questionnaireAnswersID )
         {
             //converting bitmap into byte stream
             //var stream = new MemoryStream();
@@ -19,13 +19,22 @@ namespace QuestionnaireXForms.Services
             //var bitmapData = stream.ToArray();
 
             string boundary = "---8d0f01e6b3b5dafaaadaada";
-            MultipartFormDataContent multipartContent = new MultipartFormDataContent(boundary);
+            
+            var requestParameters = new List<KeyValuePair<string, string>>() {
+                new KeyValuePair<string,string>("iImageType", "4"),
+                new KeyValuePair<string,string>("iObjectId", "16242714"),
+                new KeyValuePair<string,string>("id", "44012208")
+            };
+            var multipartFormDataContent = new MultipartFormDataContent( boundary );
+            multipartFormDataContent.Add(new FormUrlEncodedContent(requestParameters));
+            
+            //MultipartFormDataContent multipartContent = new MultipartFormDataContent(boundary);
 
             foreach (var file in files )
             {
                 var memoryStream = new MemoryStream();
                 file.GetStream().CopyTo(memoryStream);
-                file.Dispose();
+                //file.Dispose();
 
                 var fileContent = new ByteArrayContent( memoryStream.ToArray() );
 
@@ -33,48 +42,16 @@ namespace QuestionnaireXForms.Services
                 fileContent.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data")
                 {
                     Name = "file",
-                    FileName = "questionnaire.jpg"
+                    FileName = Path.GetFileName(file.Path)
                 };
             
-
-                System.Console.WriteLine(">>>>>>>>>>>>>>>>>>>> UploadBitmapAsync 2");
-
-                var par = new List<KeyValuePair<string, string>>()
-                {
-                    new KeyValuePair<string, string>("questionnaireAnswersID", "1")
-                };
-            
-            
-                multipartContent.Add( fileContent );
+                multipartFormDataContent.Add( fileContent );
                 
             }
 
-            /*
-            if (file == null)
-            {
-                System.Console.WriteLine( "file is null" );
-                return null;
-            }
-            
-            System.Console.WriteLine( file.ToString() );
-
-            System.Console.WriteLine(">>>>>>>>>>>>>>>>>>>> UploadBitmapAsync");
-                        */
-
-            
-            
-
-
-            //multipartContent.Add(fileContent2);
-            //multipartContent.Add(fileContent3);
-
-            System.Console.WriteLine(">>>>>>>>>>>>>>>>>>>> UploadBitmapAsync 3");
-
             HttpClient httpClient = new HttpClient ();
-            HttpResponseMessage response = await httpClient.PostAsync ( App.BaseUrl +"/questionnaire/attachment?a=1", multipartContent);
+            HttpResponseMessage response = await httpClient.PostAsync ( App.BaseUrl +"/questionnaire/attachment?questionnaireAnswersID=" + questionnaireAnswersID, multipartFormDataContent);
             
-            System.Console.WriteLine(">>>>>>>>>>>>>>>>>>>> UploadBitmapAsync 4");
-
             if (response.IsSuccessStatusCode) {
                 string content = await response.Content.ReadAsStringAsync();
                 return content;

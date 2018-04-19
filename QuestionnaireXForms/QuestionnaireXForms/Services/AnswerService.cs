@@ -4,7 +4,6 @@ using System;
 using System.Collections.ObjectModel;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Android.Graphics;
 using ModernHttpClient;
 using Newtonsoft.Json.Linq;
 using QuestionnaireXForms.Domain;
@@ -60,11 +59,9 @@ namespace QuestionnaireXForms.Services
 
                 System.Console.WriteLine( DataSource.Photos );
 
-                System.Console.WriteLine( DataSource.Photos.ToString() );
-
-                System.Console.WriteLine( "ok" );
-
-                AttachmentService.UploadBitmapAsync(DataSource.Photos);
+                JObject questionnaireAnswers = JObject.FromObject( answersResponce.Result ); 
+                
+                AttachmentService.UploadBitmapAsync( DataSource.Photos, questionnaireAnswers["id"].Value<long>() );
 
                 /*
                 foreach (var file in  DataSource.Photos )
