@@ -1,14 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using ModernHttpClient;
 using Newtonsoft.Json.Linq;
 using Org.Json;
 using Plugin.Media;
+using QuestionnaireXForms.Domain;
 using QuestionnaireXForms.Services;
 using Refit;
 using Xamarin.Forms;
@@ -22,10 +25,16 @@ namespace QuestionnaireXForms
 			return nativeListView;
 		}
 
+		public ObservableCollection<PhotoContainer> Images { get; set; }
+		
 		public MainPage()
 		{
 			InitializeComponent();
 
+			Images = new ObservableCollection<PhotoContainer>();// {new PhotoContainer() { Title = "initial item" }};
+
+			BindingContext = this;
+			
 			var toolbarItem = new ToolbarItem
 			{
 				Text = "Logout"
@@ -97,13 +106,15 @@ namespace QuestionnaireXForms
 				var file = await CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions
 				{
 					Directory = "Sample",
-					Name = "test.jpg"
+					Name = "_.jpg"
 				});
 
 				if (file != null)
 				{
 					DataSource.Photos.Add( file );
-					PhotoImage.Source = ImageSource.FromStream(() => file.GetStream());
+					//PhotoImage.Source = ImageSource.FromStream(() => file.GetStream());
+					Images.Add( new PhotoContainer() { Title = "" , Image = ImageSource.FromStream(() => file.GetStream())} );
+
 				}
 			}
 			catch (Exception exception)
@@ -111,5 +122,6 @@ namespace QuestionnaireXForms
 				Console.WriteLine(exception);
 			}
 		}
+		
 	}
 }
