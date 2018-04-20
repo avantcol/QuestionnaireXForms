@@ -16,7 +16,9 @@
 		<Grid>
 			<Grid.RowDefinitions>
 				<RowDefinition Height="Auto" />
+				<!--
 				<RowDefinition Height="*" />
+				-->
 				<RowDefinition Height="*" />
 				<RowDefinition Height="*" />
 			</Grid.RowDefinitions>
@@ -26,7 +28,7 @@
 			<Image x:Name="PhotoImage" Grid.Row="1"/>
 			-->
 			
-			<ListView x:Name="PhotoList" Grid.Row="2"
+			<ListView x:Name="PhotoList" Grid.Row="1"
 			          HasUnevenRows="True"
 			          ItemsSource="{Binding Images}" >
 				
@@ -42,7 +44,7 @@
 			<!--
 			<Label Text="{x:Static questionnaireXForms:App.Description}" HorizontalTextAlignment="Center" />
 			-->
-			<local:NativeListView Grid.Row="3" x:Name="nativeListView" ItemSelected="OnItemSelected" VerticalOptions="FillAndExpand" />
+			<local:NativeListView Grid.Row="2" x:Name="nativeListView" ItemSelected="OnItemSelected" VerticalOptions="FillAndExpand" />
 		</Grid>
 	</ContentPage.Content> 
 </ContentPage>
