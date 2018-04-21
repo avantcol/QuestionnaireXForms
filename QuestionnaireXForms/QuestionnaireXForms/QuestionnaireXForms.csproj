@@ -6,6 +6,7 @@
     <PackageReference Include="Ideine.ModernHttpClient" Version="3.2.2" />
     <PackageReference Include="Refit" Version="4.3.0" />
     <PackageReference Include="Xam.Plugin.Media" Version="3.2.0.245-beta" />
+    <PackageReference Include="Xamarin.Controls.SignaturePad.Forms" Version="2.3.0" />
     <PackageReference Include="Xamarin.Forms" Version="2.5.0.122203" />
   </ItemGroup>
   <ItemGroup>

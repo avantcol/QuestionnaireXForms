@@ -50,6 +50,14 @@ namespace QuestionnaireXForms
 			submitItem.Clicked += OnSubmitButtonClicked;
 			ToolbarItems.Add(submitItem);
 
+
+			var signatureMenuItem = new ToolbarItem
+			{
+				Text = "Sign"
+			};
+			signatureMenuItem.Clicked += OnSignButtonClicked;
+			ToolbarItems.Add(signatureMenuItem);
+			
 			Title = "Questionnaire";
 
 			async void OnLogoutButtonClicked(object sender, EventArgs e)
@@ -57,6 +65,12 @@ namespace QuestionnaireXForms
 				App.IsUserLoggedIn = false;
 				Navigation.InsertPageBefore(new LoginPage(), this);
 				await Navigation.PopAsync();
+			}
+
+			async void OnSignButtonClicked(object sender, EventArgs e)
+			{
+				System.Console.WriteLine("OnSignButtonClicked");
+				await Navigation.PushModalAsync(new SignaturePage());
 			}
 
 			async void OnSubmitButtonClicked(object sender, EventArgs e)
@@ -73,7 +87,7 @@ namespace QuestionnaireXForms
 					BaseAddress = new Uri(App.BaseUrl)
 				};
 				QuestionnaireService httpbinApiService = RestService.For<QuestionnaireService>(client);
-				Task<JObject> questions = httpbinApiService.GetQuestions(App.User.id);
+				Task<JObject> questions = httpbinApiService.GetQuestions( App.User.id, App.User.quUserSession );
 				questions.Wait();
 
 				System.Console.WriteLine(questions.Result.ToString());

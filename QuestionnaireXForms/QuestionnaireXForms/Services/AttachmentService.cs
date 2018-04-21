@@ -46,11 +46,12 @@ namespace QuestionnaireXForms.Services
                 };
             
                 multipartFormDataContent.Add( fileContent );
-                
             }
 
             HttpClient httpClient = new HttpClient ();
-            HttpResponseMessage response = await httpClient.PostAsync ( App.BaseUrl +"/questionnaire/attachment?questionnaireAnswersID=" + questionnaireAnswersID, multipartFormDataContent);
+            HttpResponseMessage response = await httpClient
+                .PostAsync ( App.BaseUrl +"/questionnaire/attachment?quUserSession"+App.User.quUserSession
+                             +"&questionnaireAnswersID=" + questionnaireAnswersID, multipartFormDataContent);
             
             if (response.IsSuccessStatusCode) {
                 string content = await response.Content.ReadAsStringAsync();

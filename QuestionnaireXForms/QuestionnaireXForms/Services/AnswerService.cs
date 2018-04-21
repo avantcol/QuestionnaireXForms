@@ -50,7 +50,7 @@ namespace QuestionnaireXForms.Services
                     BaseAddress = new Uri(App.BaseUrl)
                 };
                 IAnswerService answerService = RestService.For<IAnswerService>(client);
-                Task<JObject> answersResponce = answerService.SendAnswers( pollAnswers.ToString() );
+                Task<JObject> answersResponce = answerService.SendAnswers( pollAnswers.ToString(), App.User.quUserSession );
                 answersResponce.Wait();
 
                 System.Console.WriteLine(answersResponce.Result.ToString());
@@ -83,6 +83,6 @@ namespace QuestionnaireXForms.Services
     public interface IAnswerService
     {
         [Get("/questionnaire/answers")]
-        Task<JObject> SendAnswers( string answers );        
+        Task<JObject> SendAnswers( string answers, string quUserSession );        
     }
 }

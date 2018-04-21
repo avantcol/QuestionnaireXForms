@@ -44,6 +44,7 @@ namespace QuestionnaireXForms
 
                 if (resUser != null && resUser.id != 0)
                 {
+                    App.SessionID = resUser.quUserSession;
                     App.IsUserLoggedIn = true;
                     App.User = resUser;
                     Navigation.InsertPageBefore (new MainPage (), this);
@@ -55,6 +56,7 @@ namespace QuestionnaireXForms
                     messageLabel.Text = "Login failed";
                     passwordEntry.Text = string.Empty;
                     App.User = null;
+                    App.SessionID = null;
                 }
                 
             }

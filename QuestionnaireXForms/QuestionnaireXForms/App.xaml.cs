@@ -13,6 +13,8 @@ namespace QuestionnaireXForms
 
 		public static readonly string BaseUrl = "http://10.0.0.23:8080/gpserver";
 
+		public static string SessionID { get; set; }
+		
 		public static User User { get; set; }
 		
 		public static string Description { get; set; }
