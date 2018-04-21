@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using Newtonsoft.Json.Linq;
 using Plugin.Media.Abstractions;
@@ -23,7 +24,9 @@ namespace QuestionnaireXForms
         public static string Description { get; set; }
         public static string Name { get; set; }
 
-        public static Image SignatureImage { get; set; }
+        //public static Image SignatureImage { get; set; }
+        
+        public static Stream SignatureStream { get; set; }
         
         public static List<MediaFile> Photos { get; set; } = new List<MediaFile>();
 

@@ -54,11 +54,14 @@ namespace QuestionnaireXForms
 
             if (image != null)
             {
+                /*
                 DataSource.SignatureImage = new Image
                 {
                     Aspect = Aspect.AspectFit,
                     Source = ImageSource.FromStream(() => image)
                 };
+                */
+                DataSource.SignatureStream = image;
             }
 
             await Navigation.PopModalAsync();
