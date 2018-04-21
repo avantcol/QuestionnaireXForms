@@ -1,6 +1,6 @@
-﻿
+﻿// $Id:$
+
 using System;
-using System.Linq;
 using SignaturePad.Forms;
 using Xamarin.Forms;
 
@@ -11,7 +11,6 @@ namespace QuestionnaireXForms
         public SignaturePage()
         {
             InitializeComponent();
-            
         }
         
         private async void OnChangeTheme (object sender, EventArgs e)
@@ -20,41 +19,25 @@ namespace QuestionnaireXForms
             switch (action)
             {
                 case "White":
-                    padView.BackgroundColor = Color.White;
-                    padView.StrokeColor = Color.Black;
-                    padView.ClearTextColor = Color.Black;
-                    padView.ClearText = "Clear Markers";
+                    SignatureView.BackgroundColor = Color.White;
+                    SignatureView.StrokeColor = Color.Black;
+                    SignatureView.ClearTextColor = Color.Black;
+                    SignatureView.ClearText = "Clear Markers";
                     break;
 
                 case "Black":
-                    padView.BackgroundColor = Color.Black;
-                    padView.StrokeColor = Color.White;
-                    padView.ClearTextColor = Color.White;
-                    padView.ClearText = "Clear Chalk";
+                    SignatureView.BackgroundColor = Color.Black;
+                    SignatureView.StrokeColor = Color.White;
+                    SignatureView.ClearTextColor = Color.White;
+                    SignatureView.ClearText = "Clear Chalk";
                     break;
 
                 case "Aqua":
-                    padView.BackgroundColor = Color.Aqua;
-                    padView.StrokeColor = Color.Red;
-                    padView.ClearTextColor = Color.Black;
-                    padView.ClearText = "Clear The Aqua";
+                    SignatureView.BackgroundColor = Color.Aqua;
+                    SignatureView.StrokeColor = Color.Red;
+                    SignatureView.ClearTextColor = Color.Black;
+                    SignatureView.ClearText = "Clear The Aqua";
                     break;
-            }
-        }
-
-        private async void OnGetStats (object sender, EventArgs e)
-        {
-            using (var image = await padView.GetImageStreamAsync (SignatureImageFormat.Png))
-            {
-                var imageSize = (image?.Length ?? 0) / 1000;
-
-                var points = padView.Points.ToArray ();
-                var pointCount = points.Count ();
-                var linesCount = points.Count (p => p == Point.Zero) + (points.Length > 0 ? 1 : 0);
-
-                image?.Dispose ();
-
-                await DisplayAlert ("Stats", $"The signature has {linesCount} lines or {pointCount} points, and is {imageSize:#,###.0}KB (in memory) when saved as a PNG.", "Cool");
             }
         }
 
@@ -67,22 +50,23 @@ namespace QuestionnaireXForms
                 BackgroundColor = Color.FromRgb (225, 225, 225),
                 DesiredSizeOrScale = 2f
             };
-            var image = await padView.GetImageStreamAsync (SignatureImageFormat.Png, settings);
+            var image = await SignatureView.GetImageStreamAsync (SignatureImageFormat.Png, settings);
 
-            if (image == null)
-                return;
-
-            var page = new ContentPage
+            if (image != null)
             {
-                Title = "Signature",
-                Content = new Image
+                DataSource.SignatureImage = new Image
                 {
                     Aspect = Aspect.AspectFit,
-                    Source = ImageSource.FromStream (() => image)
-                }
-            };
+                    Source = ImageSource.FromStream(() => image)
+                };
+            }
 
-            await Navigation.PushAsync (page);
+            await Navigation.PopModalAsync();
+        }
+
+        private async void DismissClicked(object sender, EventArgs e)
+        {
+            await Navigation.PopModalAsync();
         }
     }
 }

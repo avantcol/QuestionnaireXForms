@@ -23,7 +23,8 @@ namespace QuestionnaireXForms
         public static string Description { get; set; }
         public static string Name { get; set; }
 
-
+        public static Image SignatureImage { get; set; }
+        
         public static List<MediaFile> Photos { get; set; } = new List<MediaFile>();
 
 

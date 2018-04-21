@@ -1,20 +1,4 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!--
-<UserControl x:Class="QuestionnaireXForms.SignaturePage"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:QuestionnaireXForms"
-             xmlns:forms="http://xamarin.com/schemas/2014/forms"
-             mc:Ignorable="d"
-             d:DesignHeight="300" d:DesignWidth="300">
-    <forms:Grid>
-        
-    </forms:Grid>
-</UserControl>
--->
-
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:QuestionnaireXForms"
@@ -29,29 +13,43 @@
     </ContentPage.Padding>
     
     <ContentPage.Content>
-        <StackLayout HorizontalOptions="Center" VerticalOptions="Center" x:Name="stackLayout">
             <!--
             <Label Text="Xamarin.Forms Detail Page" />
             -->
-            <Label x:Name="detailLabel" />
-
-            <!--
-            <Button x:Name="dismissButton" Clicked="OnButtonClicked" Text="Dismiss" />
-            -->
-        
             
-            <forms:SignaturePadView x:Name="padView"
-                                        HeightRequest="150" WidthRequest="240"
+            <!--
+            <Label x:Name="detailLabel" />
+            -->
+            
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+            <forms:SignaturePadView Grid.Row="0" x:Name="SignatureView"
+                                        PromptText="" PromptTextColor="Red"
+                                        BackgroundColor="White"
+                                        ClearText="Clear Me!" ClearTextColor="Red"
+                                        SignatureLineColor="Aqua" StrokeColor="Black" StrokeWidth="2" />
+
+            <!--            
+            <forms:SignaturePadView x:Name="SignatureView"
                                         BackgroundColor="White"
                                         CaptionText="Caption This" CaptionTextColor="Black"
                                         ClearText="Clear Me!" ClearTextColor="Red"
                                         PromptText="Prompt Here" PromptTextColor="Red"
                                         SignatureLineColor="Aqua" StrokeColor="Black" StrokeWidth="2" />
+            -->
 
+            <!--
             <Button Clicked="OnChangeTheme" Text="Change Theme" />
-            <Button Clicked="OnGetStats" Text="Get Signature Stats" />
-            <Button Clicked="OnGetImage" Text="Get Signature Image" />
+            -->
+            <Button Grid.Row="1" Clicked="OnGetImage" Text="Get Signature Image" />
+            <Button Grid.Row="2" Clicked="DismissClicked" Text="Dismiss" />
             
-        </StackLayout>
+                </Grid>
+                
     </ContentPage.Content>
 </ContentPage>
