@@ -11,8 +11,8 @@ namespace QuestionnaireXForms
 	{
 		public static bool IsUserLoggedIn { get; set; }
 
-		//public static readonly string BaseUrl = "http://10.0.0.23:8080/gpserver";
-		public static readonly string BaseUrl = "https://coltrack.com";
+		public static readonly string BaseUrl = "http://10.0.0.23:8080/gpserver";
+		//public static readonly string BaseUrl = "https://coltrack.com";
 
 		public static string SessionID { get; set; }
 		

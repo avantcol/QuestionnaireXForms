@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" package="com.companyname.QuestionnaireXForms">
-	<uses-sdk android:minSdkVersion="15" />
-
+﻿<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" package="com.companyname.QuestionnaireXForms" android:installLocation="auto">
+	<uses-sdk android:minSdkVersion="23" android:targetSdkVersion="26" />
 	<!--
 	<uses-permission android:name="android.permission.INTERNET" />
 	<uses-permission android:name="android.permission.CAMERA" />
@@ -11,7 +10,6 @@
 	-->
 
 	<application android:label="QuestionnaireXForms.Android">
-		
 		<!--
 		<provider android:name="android.support.v4.content.FileProvider" 
 				  android:authorities="com.myappname.nl.fileprovider" 
@@ -22,16 +20,8 @@
 			
 		</provider>
 		-->
-
-		<provider android:name="android.support.v4.content.FileProvider" 
-				  android:authorities="com.companyname.QuestionnaireXForms.fileprovider" 
-				  android:exported="false" 
-				  android:grantUriPermissions="true">
-			
-			<meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/file_paths"/>
-
+		<provider android:name="android.support.v4.content.FileProvider" android:authorities="com.companyname.QuestionnaireXForms.fileprovider" android:exported="false" android:grantUriPermissions="true">
+			<meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/file_paths" />
 		</provider>
-		
 	</application>
-	
 </manifest>

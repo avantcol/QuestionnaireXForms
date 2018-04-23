@@ -6,14 +6,46 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using ModernHttpClient;
 using Newtonsoft.Json.Linq;
+using Plugin.Geolocator;
+using Plugin.Geolocator.Abstractions;
 using QuestionnaireXForms.Domain;
 using Refit;
+
+using Plugin.Permissions.Abstractions;
 
 namespace QuestionnaireXForms.Services
 {
     public static class AnswerService
     {
-        public static void SendAnswers()
+        private static async Task<Position> ReadGps()
+        {
+            try
+            {
+                var hasPermission = Utils.CheckPermissions(Permission.Location);
+                hasPermission.Wait();
+                if (hasPermission.Result)
+                {
+                    var locator = CrossGeolocator.Current;
+                    locator.DesiredAccuracy =50.0;
+                    Position position = await locator.GetPositionAsync(timeout: TimeSpan.FromSeconds(10));
+                    //positionTask.Wait();
+
+                    Console.WriteLine("==================================== loc=" + position );
+
+                    //var position = await locator.GetPositionAsync(TimeSpan.FromSeconds(Timeout.Value), null, IncludeHeading.IsToggled);
+
+                    return position;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            return null;
+        }
+        
+        public static async void SendAnswers()
         {
             if (!App.IsUserLoggedIn || App.User == null)
                 return;
@@ -45,9 +77,23 @@ namespace QuestionnaireXForms.Services
 
             System.Console.WriteLine(pollAnswers.ToString());
 
-
             try
             {
+
+                //Task<Position> p = ReadGps();
+                //p.Wait();
+
+                Position position = await ReadGps();//p.Result;
+
+                if (position != null)
+                {
+                    pollAnswers["lat"] = position.Latitude;
+                    pollAnswers["lon"] = position.Longitude;
+                }
+
+                Console.WriteLine("==================================== loc=" + pollAnswers["lat"] + " " + pollAnswers["lon"]  );
+
+                
                 var client = new HttpClient(new NativeMessageHandler())
                 {
                     BaseAddress = new Uri(App.BaseUrl)
@@ -62,6 +108,7 @@ namespace QuestionnaireXForms.Services
                 System.Console.WriteLine("11111111111111111111111111111");
 
                 System.Console.WriteLine(DataSource.Photos);
+
 
                 JObject questionnaireAnswers = JObject.FromObject(answersResponce.Result);
 
