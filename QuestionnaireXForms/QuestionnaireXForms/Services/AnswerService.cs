@@ -22,7 +22,9 @@ namespace QuestionnaireXForms.Services
             try
             {
                 var hasPermission = await Utils.CheckPermissions(Permission.Location);
-                
+
+                Console.WriteLine("==================================== hasPermission=" + hasPermission );
+
                 if (hasPermission)
                 {
                     var locator = CrossGeolocator.Current;
@@ -101,16 +103,20 @@ namespace QuestionnaireXForms.Services
 
                 System.Console.WriteLine(answersResponce.Result.ToString());
 
-                System.Console.WriteLine("11111111111111111111111111111");
+                System.Console.WriteLine("11111111111111111111111111111 Send answersResponce OK.");
 
                 System.Console.WriteLine(DataSource.Photos);
 
 
                 JObject questionnaireAnswers = JObject.FromObject(answersResponce.Result);
 
-                AttachmentService.UploadBitmapAsync(DataSource.Photos, questionnaireAnswers["id"].Value<long>());
+                await AttachmentService.UploadBitmapAsync(DataSource.Photos, questionnaireAnswers["id"].Value<long>());
 
-                AttachmentService.UploadSignatureAsync(questionnaireAnswers["id"].Value<long>());
+                System.Console.WriteLine("11111111111111111111111111111 Send Photos OK.");
+
+                await AttachmentService.UploadSignatureAsync(questionnaireAnswers["id"].Value<long>());
+
+                System.Console.WriteLine("11111111111111111111111111111 Send Signature OK.");
 
             }
             catch (Exception e)
