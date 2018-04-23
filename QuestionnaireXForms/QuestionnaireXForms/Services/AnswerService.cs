@@ -21,9 +21,9 @@ namespace QuestionnaireXForms.Services
         {
             try
             {
-                var hasPermission = Utils.CheckPermissions(Permission.Location);
-                hasPermission.Wait();
-                if (hasPermission.Result)
+                var hasPermission = await Utils.CheckPermissions(Permission.Location);
+                
+                if (hasPermission)
                 {
                     var locator = CrossGeolocator.Current;
                     locator.DesiredAccuracy =50.0;
@@ -79,11 +79,7 @@ namespace QuestionnaireXForms.Services
 
             try
             {
-
-                //Task<Position> p = ReadGps();
-                //p.Wait();
-
-                Position position = await ReadGps();//p.Result;
+                Position position = await ReadGps();
 
                 if (position != null)
                 {

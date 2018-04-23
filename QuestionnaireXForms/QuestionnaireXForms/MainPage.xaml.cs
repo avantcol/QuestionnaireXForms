@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿
+using System;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Input;
 using ModernHttpClient;
 using Newtonsoft.Json.Linq;
-using Org.Json;
 using Plugin.Media;
+using Plugin.Permissions.Abstractions;
 using QuestionnaireXForms.Domain;
 using QuestionnaireXForms.Services;
 using Refit;
@@ -69,7 +65,6 @@ namespace QuestionnaireXForms
 
 			async void OnSignButtonClicked(object sender, EventArgs e)
 			{
-				System.Console.WriteLine("OnSignButtonClicked");
 				await Navigation.PushModalAsync(new SignaturePage());
 			}
 
@@ -108,7 +103,22 @@ namespace QuestionnaireXForms
 		{
 			try
 			{
+				await Utils.CheckPermissions(Permission.Camera);
 
+				/*
+				var status = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Camera);
+				if (status != PermissionStatus.Granted)
+				{
+					if (await CrossPermissions.Current.ShouldShowRequestPermissionRationaleAsync(Permission.Camera))
+					{
+						await DisplayAlert("Camera Permission", "Allow SavR to access your camera", "OK");
+					}
+
+					var results = await CrossPermissions.Current.RequestPermissionsAsync(new[] { Permission.Camera });
+					status = results[Permission.Camera];
+				}
+				*/
+				
 				await CrossMedia.Current.Initialize();
 
 				if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
