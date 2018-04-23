@@ -12,10 +12,8 @@
         </OnPlatform>
     </ContentPage.Padding>
     <ContentPage.Content>
-        <StackLayout HorizontalOptions="Center" VerticalOptions="Center" x:Name="stackLayout">
-            <!--
-            <Label Text="Xamarin.Forms Detail Page" />
-            -->
+        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="Center" x:Name="stackLayout"  >
+
             <Label x:Name="detailLabel" />
 
             <!--

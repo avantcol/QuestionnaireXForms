@@ -11,9 +11,10 @@ namespace QuestionnaireXForms
 {
     public partial class DetailPage : ContentPage
     {
-        private Dictionary<int, Question.AnswerType> _answerMap = new Dictionary<int,Question.AnswerType>();
+        private readonly Dictionary<int, Question.AnswerType> _answerMap = new Dictionary<int,Question.AnswerType>();
 
-        private MainPage _parentPage;
+        private readonly MainPage _parentPage;
+        private readonly Entry _textEntry;
         
         public DetailPage( object detail, MainPage parentPage )
         {
@@ -53,6 +54,8 @@ namespace QuestionnaireXForms
                 {
                     question.UserAnswer = _answerMap[ picker.SelectedIndex ];
                 }
+
+                question.Observation = _textEntry.Text;
                 
                 Navigation.PopModalAsync();
 
@@ -62,6 +65,9 @@ namespace QuestionnaireXForms
             };
 
             stackLayout.Children.Add( picker );
+
+            _textEntry = new Entry(){HorizontalOptions = LayoutOptions.Fill};
+            stackLayout.Children.Add( _textEntry );
 
         }
         

@@ -35,6 +35,8 @@ namespace QuestionnaireXForms.Domain
         private AnswerType _userAnswer;
         public AnswerType UserAnswer { get; set; }
 
+        public string Observation { get; set; }
+        
         public string UserAnserAsString
         {
             get

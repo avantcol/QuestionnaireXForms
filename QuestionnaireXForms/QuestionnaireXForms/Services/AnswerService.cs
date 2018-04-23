@@ -26,9 +26,12 @@ namespace QuestionnaireXForms.Services
                 JObject jObject = new JObject
                 {
                     {"id", question.Id_},
-                    {"userAnswer", (int) question.UserAnswer},
-                    {"description", "test todo"}
+                    {"userAnswer", (int) question.UserAnswer}
                 };
+                if (question.Observation != null)
+                {
+                    jObject["description"] = question.Observation;
+                }
                 jQuestions.Add(jObject);
             }
 
