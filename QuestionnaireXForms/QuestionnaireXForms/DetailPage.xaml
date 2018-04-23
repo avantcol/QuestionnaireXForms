@@ -12,9 +12,9 @@
         </OnPlatform>
     </ContentPage.Padding>
     <ContentPage.Content>
-        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="Center" x:Name="stackLayout"  >
+        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="Center" x:Name="StackLayout"  >
 
-            <Label x:Name="detailLabel" />
+            <Label x:Name="DetailLabel" />
 
             <!--
             <Button x:Name="dismissButton" Clicked="OnButtonClicked" Text="Dismiss" />

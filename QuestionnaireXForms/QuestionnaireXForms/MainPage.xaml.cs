@@ -18,7 +18,7 @@ namespace QuestionnaireXForms
 	{
 		public NativeListView GetListView()
 		{
-			return nativeListView;
+			return NativeListView;
 		}
 
 		public ObservableCollection<PhotoContainer> Images { get; set; }
@@ -87,7 +87,7 @@ namespace QuestionnaireXForms
 
 				System.Console.WriteLine(questions.Result.ToString());
 
-				nativeListView.Items = DataSource.GetList(questions.Result);
+				NativeListView.Items = DataSource.GetList(questions.Result);
 
 
 			}

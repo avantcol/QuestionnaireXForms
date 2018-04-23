@@ -1,9 +1,6 @@
 ﻿
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using Android;
-using Android.Widget;
 using QuestionnaireXForms.Domain;
 using Xamarin.Forms;
 
@@ -13,7 +10,6 @@ namespace QuestionnaireXForms
     {
         private readonly Dictionary<int, Question.AnswerType> _answerMap = new Dictionary<int,Question.AnswerType>();
 
-        private readonly MainPage _parentPage;
         private readonly Entry _textEntry;
         
         public DetailPage( object detail, MainPage parentPage )
@@ -21,13 +17,13 @@ namespace QuestionnaireXForms
             if ( ! (detail is Question ) )
                 return;
 
-            _parentPage = parentPage;
+            var parentPage1 = parentPage;
             
             Question question = detail as Question;
             
             InitializeComponent();
             
-            detailLabel.Text = question.Question_;
+            DetailLabel.Text = question.Question_;
             
             
             Picker picker = new Picker
@@ -59,15 +55,15 @@ namespace QuestionnaireXForms
                 
                 Navigation.PopModalAsync();
 
-                _parentPage.GetListView().Items = new ObservableCollection<Question>(); 
-                _parentPage.GetListView().Items = DataSource.GetQuestions();
+                parentPage1.GetListView().Items = new ObservableCollection<Question>(); 
+                parentPage1.GetListView().Items = DataSource.GetQuestions();
 
             };
 
-            stackLayout.Children.Add( picker );
+            StackLayout.Children.Add( picker );
 
             _textEntry = new Entry(){HorizontalOptions = LayoutOptions.Fill};
-            stackLayout.Children.Add( _textEntry );
+            StackLayout.Children.Add( _textEntry );
 
         }
         

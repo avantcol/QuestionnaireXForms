@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿
 using QuestionnaireXForms.Services;
 using Xamarin.Forms;
 
@@ -13,7 +10,7 @@ namespace QuestionnaireXForms
 
 		public const string BaseUrl = "http://10.0.0.23:8080/gpserver";
 
-		public static string SessionID { get; set; }
+		public static string SessionId { get; set; }
 		
 		public static User User { get; set; }
 		

@@ -29,7 +29,7 @@ namespace QuestionnaireXForms
                 Password = passwordEntry.Text
             };
 
-            System.Console.WriteLine( ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" );
+            Console.WriteLine( ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" );
 
             try
             {
@@ -40,11 +40,11 @@ namespace QuestionnaireXForms
                 LoginService httpbinApiService = RestService.For<LoginService>(client);
                 User resUser = await httpbinApiService.Login( new LoginRequestForm(user.Username, user.Password) );
             
-                System.Console.WriteLine( resUser.id );
+                Console.WriteLine( resUser.id );
 
-                if (resUser != null && resUser.id != 0)
+                if (resUser.id != 0)
                 {
-                    App.SessionID = resUser.quUserSession;
+                    App.SessionId = resUser.quUserSession;
                     App.IsUserLoggedIn = true;
                     App.User = resUser;
                     Navigation.InsertPageBefore (new MainPage (), this);
@@ -56,7 +56,7 @@ namespace QuestionnaireXForms
                     messageLabel.Text = "Login failed";
                     passwordEntry.Text = string.Empty;
                     App.User = null;
-                    App.SessionID = null;
+                    App.SessionId = null;
                 }
                 
             }
@@ -66,11 +66,6 @@ namespace QuestionnaireXForms
                 //throw;
             }
                 
-        }
-
-        bool AreCredentialsCorrect (User user)
-        {
-            return true;//user.Username == Constants.Username && user.Password == Constants.Password;
         }
     }
 }

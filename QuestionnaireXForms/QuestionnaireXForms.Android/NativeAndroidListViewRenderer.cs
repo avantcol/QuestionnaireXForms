@@ -11,7 +11,7 @@ namespace QuestionnaireXForms.Droid
 {
     public class NativeAndroidListViewRenderer : ListViewRenderer
     {
-        protected override void OnElementChanged (ElementChangedEventArgs<Xamarin.Forms.ListView> e)
+        protected override void OnElementChanged (ElementChangedEventArgs<ListView> e)
         {
             base.OnElementChanged (e);
 

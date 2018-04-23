@@ -1,17 +1,10 @@
 ﻿
 
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Threading.Tasks;
 using Android.App;
-using Android.Graphics.Drawables;
 using Android.Views;
 using Android.Widget;
-using Java.Util;
 using QuestionnaireXForms.Domain;
-using Xamarin.Forms;
-using Xamarin.Forms.Platform.Android;
 using View = Android.Views.View;
 
 namespace QuestionnaireXForms.Droid
@@ -22,24 +15,24 @@ namespace QuestionnaireXForms.Droid
     /// </summary>
     public class NativeAndroidListViewAdapter : BaseAdapter<Question>
     {
-        readonly Activity context;
-        ObservableCollection<Question> tableItems = new ObservableCollection<Question> ();
+        readonly Activity _context;
+        ObservableCollection<Question> _tableItems;
 
         public ObservableCollection<Question> Items {
             set { 
-                tableItems = new ObservableCollection<Question>( value );
+                _tableItems = new ObservableCollection<Question>( value );
             }
         }
 
         public NativeAndroidListViewAdapter (Activity context, NativeListView view)
         {
-            this.context = context;
-            tableItems = new ObservableCollection<Question>( view.Items );
+            _context = context;
+            _tableItems = new ObservableCollection<Question>( view.Items );
         }
 
         public override Question this [int position] {
             get { 
-                return tableItems [position];
+                return _tableItems [position];
             }
         }
 
@@ -49,17 +42,17 @@ namespace QuestionnaireXForms.Droid
         }
 
         public override int Count {
-            get { return tableItems.Count; }
+            get { return _tableItems.Count; }
         }
 
         public override View GetView (int position, View convertView, ViewGroup parent)
         {
-            var item = tableItems [position];
+            var item = _tableItems [position];
 
             var view = convertView;
             if (view == null) {
                 // no view to re-use, create new
-                view = context.LayoutInflater.Inflate (Resource.Layout.NativeAndroidListViewCell, null);
+                view = _context.LayoutInflater.Inflate (Resource.Layout.NativeAndroidListViewCell, null);
             }
             view.FindViewById<TextView> (Resource.Id.Text1).Text = item.Question_;
 

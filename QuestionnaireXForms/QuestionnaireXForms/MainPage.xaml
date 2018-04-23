@@ -44,7 +44,7 @@
 			<!--
 			<Label Text="{x:Static questionnaireXForms:App.Description}" HorizontalTextAlignment="Center" />
 			-->
-			<local:NativeListView Grid.Row="2" x:Name="nativeListView" ItemSelected="OnItemSelected" VerticalOptions="FillAndExpand" />
+			<local:NativeListView Grid.Row="2" x:Name="NativeListView" ItemSelected="OnItemSelected" VerticalOptions="FillAndExpand" />
 		</Grid>
 	</ContentPage.Content> 
 </ContentPage>

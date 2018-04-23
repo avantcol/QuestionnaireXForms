@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections;
+﻿
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
-using System.Linq;
 using Newtonsoft.Json.Linq;
 using Plugin.Media.Abstractions;
 using QuestionnaireXForms.Domain;
-using Xamarin.Forms;
 
 namespace QuestionnaireXForms
 {
