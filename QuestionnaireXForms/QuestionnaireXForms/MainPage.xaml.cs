@@ -33,7 +33,8 @@ namespace QuestionnaireXForms
 			
 			var toolbarItem = new ToolbarItem
 			{
-				Text = "Logout"
+				//Text = "Logout"
+				Text = "Exit"
 			};
 			toolbarItem.Clicked += OnLogoutButtonClicked;
 			ToolbarItems.Add(toolbarItem);
@@ -61,6 +62,9 @@ namespace QuestionnaireXForms
 				App.IsUserLoggedIn = false;
 				Navigation.InsertPageBefore(new LoginPage(), this);
 				await Navigation.PopAsync();
+
+				var closer = DependencyService.Get<ICloseApplication>();
+				closer?.closeApplication();
 			}
 
 			async void OnSignButtonClicked(object sender, EventArgs e)

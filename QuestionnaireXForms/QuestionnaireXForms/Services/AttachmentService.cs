@@ -73,7 +73,7 @@ namespace QuestionnaireXForms.Services
 
         public static async Task<string> UploadSignatureAsync(long questionnaireAnswersID)
         {
-            if (DataSource.SignatureStream == null || ! DataSource.SignatureStream.IsDataAvailable() )
+            if (DataSource.SignatureStream == null )
                 return null; 
             
             string boundary = "---8d0f01e6b3b5dafaaadaada";

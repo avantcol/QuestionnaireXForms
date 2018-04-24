@@ -10,6 +10,6 @@
     <external-path name="my_images" path="Android/data/com.plugin.mediatest/files/Pictures" />
     -->
     
-    <external-path name="Images" path="Android/data/com.companyname.QuestionnaireXForms/files/Pictures" />
+    <external-path name="Images" path="Android/data/com.coltrack.questionnaire/files/Pictures" />
     
 </paths>

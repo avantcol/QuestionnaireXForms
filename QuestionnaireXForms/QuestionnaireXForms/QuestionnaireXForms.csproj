@@ -22,5 +22,8 @@
     <Reference Include="Mono.Android, Version=0.0.0.0, Culture=neutral, PublicKeyToken=84e04ff9cfb79065">
       <HintPath>..\..\..\..\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\ReferenceAssemblies\Microsoft\Framework\MonoAndroid\v8.0\Mono.Android.dll</HintPath>
     </Reference>
+    <Reference Include="Plugin.CurrentActivity, Version=1.0.1.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\..\..\Users\andrei\.nuget\packages\plugin.currentactivity\1.0.1\lib\MonoAndroid10\Plugin.CurrentActivity.dll</HintPath>
+    </Reference>
   </ItemGroup>
 </Project>

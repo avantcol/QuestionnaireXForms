@@ -31,9 +31,10 @@
     <AotAssemblies>false</AotAssemblies>
     <EnableLLVM>false</EnableLLVM>
     <BundleAssemblies>false</BundleAssemblies>
+    <EmbedAssembliesIntoApk>true</EmbedAssembliesIntoApk>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
+    <DebugSymbols>false</DebugSymbols>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release</OutputPath>
@@ -41,6 +42,12 @@
     <WarningLevel>4</WarningLevel>
     <AndroidManagedSymbols>true</AndroidManagedSymbols>
     <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
+    <AotAssemblies>false</AotAssemblies>
+    <EnableLLVM>false</EnableLLVM>
+    <BundleAssemblies>false</BundleAssemblies>
+    <EmbedAssembliesIntoApk>true</EmbedAssembliesIntoApk>
+    <AndroidLinkMode>None</AndroidLinkMode>
+    <EnableProguard>true</EnableProguard>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Mono.Android" />
@@ -61,6 +68,7 @@
     <PackageReference Include="Xamarin.Android.Support.v7.MediaRouter" Version="25.4.0.2" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CloseApplication.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="NativeAndroidListViewAdapter.cs" />
     <Compile Include="NativeAndroidListViewRenderer.cs" />

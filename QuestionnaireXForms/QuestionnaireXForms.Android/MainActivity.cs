@@ -2,6 +2,7 @@
 using Android.App;
 using Android.Content.PM;
 using Android.OS;
+using Plugin.CurrentActivity;
 using Plugin.Permissions;
 
 namespace QuestionnaireXForms.Droid
@@ -18,6 +19,8 @@ namespace QuestionnaireXForms.Droid
 
             Xamarin.Forms.Forms.Init(this, bundle);
             LoadApplication(new App());
+            
+            CrossCurrentActivity.Current.Activity = this;
         }
         
         /*
@@ -30,7 +33,10 @@ namespace QuestionnaireXForms.Droid
         
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Permission[] grantResults)
         {
+            System.Console.WriteLine("------------------------------------------------------");
+            base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
             PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
+        
     }
 }

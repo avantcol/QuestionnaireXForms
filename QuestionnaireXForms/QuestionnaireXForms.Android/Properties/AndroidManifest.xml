@@ -1,13 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" package="com.companyname.QuestionnaireXForms" android:installLocation="auto">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" package="com.coltrack.questionnaire" android:installLocation="auto">
 	<uses-sdk android:minSdkVersion="23" android:targetSdkVersion="25" />
-	<!--
-	<uses-permission android:name="android.permission.INTERNET" />
-	<uses-permission android:name="android.permission.CAMERA" />
-	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-	-->
 	<!--
 	<uses-permission android:name="android.permission.INTERNET" />
 	<uses-permission android:name="android.permission.CAMERA" />
@@ -19,7 +12,12 @@
 			android:name="android.hardware.camera"
 			android:required="true" />
 			-->
-	<application android:label="QuestionnaireXForms.Android">
+	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+	<uses-permission android:name="android.permission.CAMERA" />
+	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+	<application android:label="Questionnaire" android:icon="@drawable/icon">
 		<!--
 		<provider android:name="android.support.v4.content.FileProvider" 
 				  android:authorities="com.myappname.nl.fileprovider" 
@@ -30,7 +28,7 @@
 			
 		</provider>
 		-->
-		<provider android:name="android.support.v4.content.FileProvider" android:authorities="com.companyname.QuestionnaireXForms.fileprovider" android:exported="false" android:grantUriPermissions="true">
+		<provider android:name="android.support.v4.content.FileProvider" android:authorities="com.coltrack.questionnaire.fileprovider" android:exported="false" android:grantUriPermissions="true">
 			<meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/file_paths" />
 		</provider>
 	</application>
