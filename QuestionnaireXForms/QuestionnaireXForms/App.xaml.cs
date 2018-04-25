@@ -1,5 +1,4 @@
 ﻿
-using Plugin.CurrentActivity;
 using QuestionnaireXForms.Services;
 using Xamarin.Forms;
 
@@ -9,8 +8,7 @@ namespace QuestionnaireXForms
 	{
 		public static bool IsUserLoggedIn { get; set; }
 
-		//public const string BaseUrl = "http://10.0.0.23:8080/gpserver";
-		public const string BaseUrl = "https://coltrack.com";
+		public const string BaseUrl = "http://10.0.0.23:8080/gpserver";
 
 		public static string SessionId { get; set; }
 		
