@@ -1,18 +1,27 @@
 ﻿
+using System;
 using Android.App;
-using QuestionnaireXForms;
+using QuestionnaireXForms.Droid;
 using Xamarin.Forms;
 
-[assembly: Dependency(typeof(ICloseApplication))]
+[assembly: Dependency(typeof(CloseApplication))]
 namespace QuestionnaireXForms.Droid
 {
     public class CloseApplication : ICloseApplication
     {
-        public void closeApplication()
+        public void Close()
         {
-            if (Forms.Context == null) return;
-            var activity = (Activity)Forms.Context;
-            activity.FinishAffinity();
+            try
+            {
+                if (Forms.Context == null) return;
+                var activity = (Activity)Forms.Context;
+                activity.FinishAffinity();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                //throw;
+            }
         }
     }
 }

@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuestionnaireXForms.iOS", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuestionnaireXForms.UWP", "QuestionnaireXForms\QuestionnaireXForms.UWP\QuestionnaireXForms.UWP.csproj", "{01E938CA-6BB6-4FD2-BC5E-0F4230687410}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuestionnaireXForms", "QuestionnaireXForms\QuestionnaireXForms\QuestionnaireXForms.csproj", "{D45454F9-CAE8-467E-8A55-AEDAD920A70C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuestionnaireXForms", "QuestionnaireXForms\QuestionnaireXForms\QuestionnaireXForms.csproj", "{D45454F9-CAE8-467E-8A55-AEDAD920A70C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

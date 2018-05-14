@@ -69,6 +69,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CloseApplication.cs" />
+    <Compile Include="GPSUnitNativeAndroidListViewAdapter.cs" />
+    <Compile Include="GPSUnitNativeAndroidListViewRenderer.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="NativeAndroidListViewAdapter.cs" />
     <Compile Include="NativeAndroidListViewRenderer.cs" />
@@ -101,13 +103,9 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\QuestionnaireXForms\QuestionnaireXForms.csproj">
-      <Project>{CD4DDC31-D076-417F-8F65-749674C4E3D8}</Project>
+      <Project>{d45454f9-cae8-467e-8a55-aedad920a70c}</Project>
       <Name>QuestionnaireXForms</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="Resources\layout\Main.axml" />
-  </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>
