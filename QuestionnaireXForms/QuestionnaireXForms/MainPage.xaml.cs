@@ -80,10 +80,7 @@ namespace QuestionnaireXForms
 
 			if (App.IsUserLoggedIn && App.User != null)
 			{
-				var client = new HttpClient(new NativeMessageHandler())
-				{
-					BaseAddress = new Uri(App.BaseUrl)
-				};
+				var client = ServiceUtils.GetHttpClient();
 
 				QuestionnaireService httpService1 = RestService.For<QuestionnaireService>(client);
 				Task<JObject> questions = httpService1.GetQuestions( App.User.id, App.User.quUserSession );

@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using ModernHttpClient;
 using Newtonsoft.Json.Linq;
+using QuestionnaireXForms.Domain;
 using QuestionnaireXForms.Services;
 using Refit;
 using Xamarin.Forms;
@@ -36,11 +37,8 @@ namespace QuestionnaireXForms
 
             if (App.IsUserLoggedIn && App.User != null)
             {
-                var client = new HttpClient(new NativeMessageHandler())
-                {
-                    BaseAddress = new Uri(App.BaseUrl)
-                };
-
+                var client = ServiceUtils.GetHttpClient();
+                
                 UnitListService httpService2 = RestService.For<UnitListService>(client);
                 Task<JObject> gpsUnits = httpService2.GetGPSUnits( App.User.id, App.User.quUserSession );
                 gpsUnits.Wait();
@@ -48,10 +46,17 @@ namespace QuestionnaireXForms
                 GpsUnitsNativeListView.Items = DataSource.GetGPSUnitList(gpsUnits.Result);
             }
         }
-        
+
         async void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            //await Navigation.PushModalAsync(new DetailPage(e.SelectedItem, this));
+            var selected = e.SelectedItem as GPSUnit;
+            if (selected == null)
+                return;
+
+            DataSource.SelectedUnit = selected;
+            
+            Navigation.InsertPageBefore (new MainPage (), this);
+
         }
     }
 }

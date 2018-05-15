@@ -33,21 +33,15 @@ namespace QuestionnaireXForms
 
             try
             {
-                var client = new HttpClient(new NativeMessageHandler()) 
-                { 
-                    BaseAddress = new Uri(App.BaseUrl) 
-                };
+                var client = ServiceUtils.GetHttpClient();
                 LoginService httpbinApiService = RestService.For<LoginService>(client);
                 User resUser = await httpbinApiService.Login( new LoginRequestForm(user.Username, user.Password) );
             
-                Console.WriteLine( resUser.id );
-
                 if (resUser.id != 0)
                 {
                     App.SessionId = resUser.quUserSession;
                     App.IsUserLoggedIn = true;
                     App.User = resUser;
-                    //Navigation.InsertPageBefore (new MainPage (), this);
                     Navigation.InsertPageBefore (new GPSUnitsListPage(), this);
                     await Navigation.PopAsync ();
                 }

@@ -10,6 +10,8 @@ namespace QuestionnaireXForms
 {
     public static class DataSource
     {
+        public static GPSUnit SelectedUnit { get; set; } = null;
+
         private static ObservableCollection<Question> _questions = new ObservableCollection<Question>();
         public static ObservableCollection<Question> GetQuestions()
         {
