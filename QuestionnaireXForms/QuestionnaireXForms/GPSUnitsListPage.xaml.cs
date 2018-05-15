@@ -1,8 +1,6 @@
 ﻿
 using System;
-using System.Net.Http;
 using System.Threading.Tasks;
-using ModernHttpClient;
 using Newtonsoft.Json.Linq;
 using QuestionnaireXForms.Domain;
 using QuestionnaireXForms.Services;
@@ -56,6 +54,7 @@ namespace QuestionnaireXForms
             DataSource.SelectedUnit = selected;
             
             Navigation.InsertPageBefore (new MainPage (), this);
+            Navigation.RemovePage( this );
 
         }
     }

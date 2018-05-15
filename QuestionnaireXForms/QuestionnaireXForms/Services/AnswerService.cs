@@ -72,6 +72,7 @@ namespace QuestionnaireXForms.Services
             JObject pollAnswers = new JObject
             {
                 {"userId", App.User.id},
+                {"unitID", DataSource.SelectedUnit.Id},
                 {"questionnaireId", DataSource.QuestionnaireId},
                 {"time", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")},
                 {"answers", jQuestions}
