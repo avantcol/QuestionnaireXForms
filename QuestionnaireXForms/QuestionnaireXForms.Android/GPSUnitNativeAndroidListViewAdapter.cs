@@ -7,7 +7,7 @@ using QuestionnaireXForms.Domain;
 
 namespace QuestionnaireXForms.Droid
 {
-    public class GPSUnitNativeAndroidListViewAdapter : BaseAdapter<GPSUnit>
+    public class GpsUnitNativeAndroidListViewAdapter : BaseAdapter<GPSUnit>
     {
         readonly Activity _context;
         ObservableCollection<GPSUnit> _tableItems;
@@ -16,7 +16,7 @@ namespace QuestionnaireXForms.Droid
             set => _tableItems = new ObservableCollection<GPSUnit>( value );
         }
 
-        public GPSUnitNativeAndroidListViewAdapter (Activity context, GPSUnitListView view)
+        public GpsUnitNativeAndroidListViewAdapter (Activity context, GPSUnitListView view)
         {
             _context = context;
             _tableItems = new ObservableCollection<GPSUnit>( view.Items );

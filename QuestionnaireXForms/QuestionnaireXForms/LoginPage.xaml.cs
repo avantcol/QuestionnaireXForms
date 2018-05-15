@@ -47,7 +47,8 @@ namespace QuestionnaireXForms
                     App.SessionId = resUser.quUserSession;
                     App.IsUserLoggedIn = true;
                     App.User = resUser;
-                    Navigation.InsertPageBefore (new MainPage (), this);
+                    //Navigation.InsertPageBefore (new MainPage (), this);
+                    Navigation.InsertPageBefore (new GPSUnitsListPage(), this);
                     await Navigation.PopAsync ();
                 }
                 else

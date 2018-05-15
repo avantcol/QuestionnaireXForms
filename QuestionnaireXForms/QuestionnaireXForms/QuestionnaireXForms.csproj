@@ -26,4 +26,10 @@
       <HintPath>..\..\..\..\Users\andrei\.nuget\packages\plugin.currentactivity\1.0.1\lib\MonoAndroid10\Plugin.CurrentActivity.dll</HintPath>
     </Reference>
   </ItemGroup>
+  <ItemGroup>
+    <Page Include="GPSUnitsListPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </Page>
+  </ItemGroup>
 </Project>

@@ -21,7 +21,6 @@
 				-->
 				<RowDefinition Height="*" />
 				<RowDefinition Height="*" />
-				<RowDefinition Height="*" />
 			</Grid.RowDefinitions>
 
 			<Button x:Name="CameraButton" Text="Take Photo" Grid.Row="0" />
@@ -47,8 +46,6 @@
 			-->
 			<local:NativeListView Grid.Row="2" x:Name="NativeListView" ItemSelected="OnItemSelected" VerticalOptions="FillAndExpand" />
 
-			<local:GPSUnitListView Grid.Row="3" x:Name="GPSUnitsNativeListView" ItemSelected="OnItemSelected" VerticalOptions="FillAndExpand" />
-			
 		</Grid>
 	</ContentPage.Content> 
 </ContentPage>

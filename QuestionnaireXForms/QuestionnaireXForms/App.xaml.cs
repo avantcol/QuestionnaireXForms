@@ -23,7 +23,8 @@ namespace QuestionnaireXForms
 			if (!IsUserLoggedIn) {
 				MainPage = new NavigationPage (new LoginPage ());
 			} else {
-				MainPage = new NavigationPage (new MainPage());
+				//MainPage = new NavigationPage (new MainPage());
+				MainPage = new NavigationPage (new GPSUnitsListPage());
 			}
 		}
 
@@ -41,7 +42,5 @@ namespace QuestionnaireXForms
 		{
 			// Handle when your app resumes
 		}
-		
-		
 	}
 }

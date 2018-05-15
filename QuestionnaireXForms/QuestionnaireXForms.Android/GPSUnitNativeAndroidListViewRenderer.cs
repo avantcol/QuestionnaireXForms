@@ -5,10 +5,10 @@ using QuestionnaireXForms.Droid;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
-[assembly: ExportRenderer (typeof(GPSUnitListView), typeof(GPSUnitNativeAndroidListViewRenderer))]
+[assembly: ExportRenderer (typeof(GPSUnitListView), typeof(GpsUnitNativeAndroidListViewRenderer))]
 namespace QuestionnaireXForms.Droid
 {
-    public class GPSUnitNativeAndroidListViewRenderer : ListViewRenderer
+    public class GpsUnitNativeAndroidListViewRenderer : ListViewRenderer
     {
         protected override void OnElementChanged(ElementChangedEventArgs<ListView> e)
         {
@@ -23,7 +23,7 @@ namespace QuestionnaireXForms.Droid
             if (e.NewElement != null)
             {
                 // subscribe
-                Control.Adapter = new GPSUnitNativeAndroidListViewAdapter(Forms.Context as Android.App.Activity, e.NewElement as GPSUnitListView);
+                Control.Adapter = new GpsUnitNativeAndroidListViewAdapter(Forms.Context as Android.App.Activity, e.NewElement as GPSUnitListView);
                 Control.ItemClick += OnItemClick;
             }
         }
@@ -35,7 +35,7 @@ namespace QuestionnaireXForms.Droid
             if (e.PropertyName == GPSUnitListView.ItemsProperty.PropertyName)
             {
                 Control.Adapter =
-                    new GPSUnitNativeAndroidListViewAdapter(Forms.Context as Android.App.Activity, Element as GPSUnitListView);
+                    new GpsUnitNativeAndroidListViewAdapter(Forms.Context as Android.App.Activity, Element as GPSUnitListView);
             }
         }
 

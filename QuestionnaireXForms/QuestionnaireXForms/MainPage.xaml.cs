@@ -33,7 +33,6 @@ namespace QuestionnaireXForms
 			
 			var toolbarItem = new ToolbarItem
 			{
-				//Text = "Logout"
 				Text = "Exit"
 			};
 			toolbarItem.Clicked += OnLogoutButtonClicked;
@@ -86,22 +85,13 @@ namespace QuestionnaireXForms
 					BaseAddress = new Uri(App.BaseUrl)
 				};
 
-				/*
 				QuestionnaireService httpService1 = RestService.For<QuestionnaireService>(client);
 				Task<JObject> questions = httpService1.GetQuestions( App.User.id, App.User.quUserSession );
 				questions.Wait();
 				System.Console.WriteLine(questions.Result.ToString());
 				NativeListView.Items = DataSource.GetList(questions.Result);
-				*/
-
-				UnitListService httpService2 = RestService.For<UnitListService>(client);
-				Task<JObject> gpsUnits = httpService2.GetGPSUnits( App.User.id, App.User.quUserSession );
-				gpsUnits.Wait();
-				System.Console.WriteLine(gpsUnits.Result.ToString());
-				GPSUnitsNativeListView.Items = DataSource.GetGPSUnitList(gpsUnits.Result);
 
 			}
-
 		}
 
 		async void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
